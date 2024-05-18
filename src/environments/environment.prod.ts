@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://ai.henjili.com/api',
-  webSocketUrl: 'ws://ai.henjili.com/ai'
+  apiUrl: 'https://demo.henjili.com/ai/api/api',
+  webSocketUrl: 'wss://demo.henjili.com/ai/api/ai'
 };
