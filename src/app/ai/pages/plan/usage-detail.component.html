@@ -1,0 +1,19 @@
+<nz-table #basicTable
+          [nzData]="usageDetails"
+          [nzScroll]="{y: '60vh'}"
+>
+  <thead>
+  <tr>
+    <th>使用类型</th>
+    <th>使用积分</th>
+    <th>创建日期</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let usageDetail of basicTable.data">
+    <td>{{ usageDetail.type }}</td>
+    <td>{{ '-'+usageDetail.points }}</td>
+    <td>{{ usageDetail.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+  </tr>
+  </tbody>
+</nz-table>

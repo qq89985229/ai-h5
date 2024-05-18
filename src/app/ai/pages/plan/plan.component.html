@@ -1,0 +1,47 @@
+<div class="right-scroll">
+  <div class="plan-list">
+    <div nz-row [nzGutter]="{xs: 8, sm: 16, md: 24}">
+      @for (plan of planList; track plan) {
+        <div class="item" nz-col [nzSpan]="8" [nzXs]="24" [nzXl]="8">
+          <nz-ribbon nzText="￥{{plan.amount / 100}}元/{{plan.unit}}" nzColor="red">
+            <nz-card nzHoverable nzTitle="{{plan.name}}">
+              <nz-list>
+                @for (detail of plan.details; track detail) {
+                  <nz-list-item>{{ detail }}</nz-list-item>
+                }
+              </nz-list>
+              <div
+                nz-flex
+                [nzJustify]="'flex-end'"
+              >
+                <button nz-button nzType="default" (click)="submitOrder(plan.id)">立即购买</button>
+              </div>
+            </nz-card>
+          </nz-ribbon>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<nz-modal [(nzVisible)]="showPayModal"
+          nzCentered nzTitle="微信扫码支付"
+          [nzFooter]=null
+          (nzOnCancel)="showPayModal = false"
+          (nzAfterClose)="this.webSocket$.complete();"
+>
+  <ng-container *nzModalContent>
+    <div
+      class="btn-wrappers"
+      nz-flex
+      [nzJustify]="'center'"
+      [nzAlign]="'center'"
+    >
+      <nz-qrcode
+        [nzValue]="order.payCodeUrl"
+        nzIcon="https://cdnjs-5913ex.oss-cn-shenzhen.aliyuncs.com/ai/image/wechat-pay.png"
+        nzLevel="H"
+      ></nz-qrcode>
+    </div>
+  </ng-container>
+</nz-modal>

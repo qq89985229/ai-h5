@@ -1,0 +1,21 @@
+<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="login()">
+  <nz-form-item>
+    <nz-form-control nzErrorTip="请输入正确的手机号!">
+      <nz-input-group nzSize="large" nzPrefixIcon="mobile" [nzAddOnAfter]="suffixButton">
+        <input type="text" nz-input formControlName="mobile" placeholder="请输入手机号" />
+      </nz-input-group>
+      <ng-template #suffixButton>
+        <span *ngIf="!isCountdownActive" (click)="getMobileCode();">发送验证码</span>
+        <span *ngIf="isCountdownActive">{{ countdown }}秒后重发</span>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="请输入正确的验证码!">
+      <nz-input-group nzSearch nzSize="large" nzPrefixIcon="lock">
+        <input type="text" nz-input formControlName="code" placeholder="请输入验证码" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <button nz-button nzSize="large" class="login-form-button login-form-margin" [nzType]="'primary'">登录</button>
+</form>

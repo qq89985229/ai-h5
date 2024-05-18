@@ -1,0 +1,40 @@
+<div class="right-scroll">
+  <nz-list [nzItemLayout]="'horizontal'">
+    @for (choice of chat.choices; track choice) {
+      <nz-comment [nzAuthor]="choice.author">
+        <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="choice.avatar"></nz-avatar>
+        <nz-comment-content>
+          <p>{{ choice.delta.content }}</p>
+        </nz-comment-content>
+        <nz-comment-action>复制</nz-comment-action>
+      </nz-comment>
+    }
+    @if (chat.choices && chat.choices.length === 0) {
+      <nz-list-empty/>
+    }
+  </nz-list>
+</div>
+
+<div class="bottom-textarea">
+  <form nz-form [formGroup]="validateForm">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group [nzSuffix]="suffixIconSend">
+            <textarea
+              formControlName="content"
+              nz-input
+              placeholder="Enter 发送; Shift + Enter 换行"
+              [nzAutosize]="{ minRows: 1, maxRows: 6 }"
+              [nzBorderless]="true"
+              (keydown.enter)="keydownEnter($event)"
+            >
+            </textarea>
+        </nz-input-group>
+        <ng-template #suffixIconSend>
+          <button nz-button nzType="primary" nzSearch (click)="submitForm()">提交<span nz-icon nzType="send"></span></button>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
+

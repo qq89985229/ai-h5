@@ -1,0 +1,81 @@
+<div class="right-scroll">
+  <div class="painting-container">
+    @for (i of list; track i) {
+      <nz-comment nzAuthor="珠宝ai">
+        <nz-avatar
+          nz-comment-avatar
+          nzIcon="user"
+          nzSrc="https://nlp-eb.cdn.bcebos.com/static/eb/asset/robin.e9dc83e5.png"
+        ></nz-avatar>
+        <nz-comment-content>
+          <p>
+            身着机甲的少年在洁白的月光下轻轻的摸着一条黄色的狗 极高分辨率 游戏cg 在赛博朋克城市 月亮 夜晚
+          </p>
+        </nz-comment-content>
+      </nz-comment>
+
+      <div class="image">
+        <img
+          nz-image
+          width="200px"
+          height="200px"
+          nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          alt=""
+        />
+      </div>
+
+
+      <div style="margin-top: 15px;">
+        <div class="btn-wrapper" nz-flex [nzGap]="'small'" [nzWrap]="'wrap'">
+          <button nz-button nzType="text" nzTooltipTitle="U按钮查看图像，生成所选图像的更大版本并添加更多细节，可进行局部重绘，无损放大，调整创作等。不消耗积分" [nzTooltipPlacement]="['topLeft', 'leftTop']" nz-tooltip>编辑<span nz-icon nzType="exclamation-circle"></span></button>
+          <button nz-button nzType="default">U1</button>
+          <button nz-button nzType="default">U2</button>
+          <button nz-button nzType="default">U3</button>
+          <button nz-button nzType="default">U4</button>
+          <button nz-button nzType="default"><span nz-icon nzType="reload" nzTheme="outline"></span></button>
+        </div>
+
+        <div class="btn-wrapper" nz-flex [nzGap]="'small'" [nzWrap]="'wrap'">
+          <button nz-button nzType="text" nzTooltipTitle="V按钮创建所选网格图像的细微变化，创建变体会生成与所选图像的整体风格和构图相似的新图像网格。消耗1积分" [nzTooltipPlacement]="['topLeft', 'leftTop']" nz-tooltip>变化<span nz-icon nzType="exclamation-circle"></span></button>
+          <button nz-button nzType="default">V1</button>
+          <button nz-button nzType="default">V2</button>
+          <button nz-button nzType="default">V3</button>
+          <button nz-button nzType="default">V4</button>
+        </div>
+
+        <div class="btn-wrapper" nz-flex [nzGap]="'small'" [nzWrap]="'wrap'">
+          <button nz-button nzType="text" nzTooltipTitle="C按钮可直接查看或下载原图，不消耗积分" [nzTooltipPlacement]="['topLeft', 'leftTop']" nz-tooltip>查看<span nz-icon nzType="exclamation-circle"></span></button>
+          <button nz-button nzType="default">C1</button>
+          <button nz-button nzType="default">C2</button>
+          <button nz-button nzType="default">C3</button>
+          <button nz-button nzType="default">C4</button>
+        </div>
+      </div>
+      <nz-divider></nz-divider>
+    }
+  </div>
+</div>
+
+
+<div class="bottom-textarea">
+  <form nz-form [formGroup]="validateForm">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group [nzSuffix]="suffixIconSend">
+            <textarea
+              formControlName="content"
+              nz-input
+              placeholder="Enter 发送; Shift + Enter 换行"
+              [nzAutosize]="{ minRows: 1, maxRows: 6 }"
+              [nzBorderless]="true"
+              (keydown.enter)="keydownEnter($event)"
+            >
+            </textarea>
+        </nz-input-group>
+        <ng-template #suffixIconSend>
+          <button nz-button nzType="primary" nzSearch>提交<span nz-icon nzType="send" (click)="submitForm()"></span></button>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>

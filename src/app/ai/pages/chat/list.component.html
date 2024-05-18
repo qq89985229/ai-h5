@@ -1,0 +1,45 @@
+<nz-table #basicTable
+          [nzData]="chatList"
+          [nzScroll]="{y: '60vh'}"
+>
+  <thead>
+  <tr>
+    <th>话题</th>
+    <th>创建日期</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let chat of basicTable.data">
+    <td> {{ (chat.choices.length > 0 && chat.choices[0]?.delta?.content) ? chat.choices[0].delta.content : '无标题的聊天' }}</td>
+    <td>{{ chat.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+    <td>
+      <nz-space>
+        <button
+          *nzSpaceItem
+          nz-button
+          nzType="primary"
+          nzTooltipTitle="查看"
+          nzTooltipPlacement="right"
+          nz-tooltip
+          [routerLink]="'/ai/chat/chat/' + chat.id"
+        >
+          <i nz-icon nzType="eye"></i>
+        </button>
+        <button
+          *nzSpaceItem
+          nz-button
+          nzType="primary"
+          nzDanger
+          nzTooltipTitle="删除"
+          nzTooltipPlacement="right"
+          nz-tooltip
+          (click)="deleteConfirm([chat.id]);"
+        >
+          <i nz-icon nzType="delete"></i>
+        </button>
+      </nz-space>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

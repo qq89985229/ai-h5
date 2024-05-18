@@ -1,0 +1,19 @@
+<ng-container *ngIf="user | async as user">
+  <form nz-form [formGroup]="validateForm" class="form" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="请输入你的姓名!">
+        <nz-input-group nzSize="large" nzPrefixIcon="user">
+          <input type="text" nz-input formControlName="name" placeholder="姓名" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group nzSize="large" nzPrefixIcon="mobile">
+          <input type="number" nz-input [value]="user.mobile" placeholder="手机号" [disabled]="true" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <button nz-button nzSize="large" [nzType]="'primary'">提交</button>
+  </form>
+</ng-container>

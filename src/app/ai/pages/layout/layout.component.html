@@ -1,0 +1,93 @@
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar"
+            nzCollapsible
+            nzWidth="256px"
+            nzBreakpoint="md"
+            [(nzCollapsed)]="isCollapsed"
+            [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <a href="">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>AI</h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu nzOpen nzTitle="AI会话" nzIcon="comment">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/ai/chat/chat">新建会话</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/ai/chat/list">历史会话</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="套餐信息" nzIcon="pay-circle">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/ai/plan/plan">开通套餐</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/ai/plan/user-plan">我的套餐</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/ai/plan/usage-detail">使用明细</a>
+          </li>
+        </ul>
+      </li>
+      <ng-container *ngIf="user | async">
+        <li nz-submenu nzOpen nzTitle="账户信息" nzIcon="user">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/ai/user/edit">基本信息</a>
+            </li>
+          </ul>
+        </li>
+      </ng-container>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <div class="header-trigger" (click)="isCollapsed = !isCollapsed">
+            <span class="trigger"
+                  nz-icon
+                  [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            ></span>
+        </div>
+        <div class="header-right">
+
+          <ng-container *ngIf="user | async; then userBlock; else noUserBlock"></ng-container>
+          <ng-template #userBlock let-user>
+            <div nz-dropdown [nzDropdownMenu]="menu">
+              <nz-avatar nzIcon="user"></nz-avatar>{{ user?.name }}
+            </div>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item routerLink="/ai/user/edit">
+                    <i nz-icon [nzType]="'edit'"></i>资料维护
+                </li>
+                <li nz-menu-item (click)="logout()">
+                  <i nz-icon [nzType]="'logout'"></i>
+                  退出
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+          </ng-template>
+
+          <ng-template #noUserBlock>
+            <p (click)="showLoginModal();"><span nz-icon nzType="user" nzTheme="outline"></span>登录</p>
+          </ng-template>
+
+        </div>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <nz-breadcrumb [nzAutoGenerate]="true"></nz-breadcrumb>
+        <nz-divider></nz-divider>
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

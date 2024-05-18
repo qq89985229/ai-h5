@@ -1,0 +1,23 @@
+<nz-table #basicTable
+          [nzData]="userPlanList"
+          [nzScroll]="{y: '60vh'}"
+>
+  <thead>
+  <tr>
+    <th>套餐类型</th>
+    <th>价格</th>
+    <th>剩余积分</th>
+    <th>创建日期</th>
+    <th>过期时间</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let userPlan of basicTable.data">
+    <td>{{ userPlan.plan.name }}</td>
+    <td>{{ userPlan.plan.amount / 100 | currency: 'CNY':'symbol-narrow': '1.0-2' }}</td>
+    <td>{{ userPlan.plan.points }}</td>
+    <td>{{ userPlan.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+    <td>{{ userPlan.expireAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+  </tr>
+  </tbody>
+</nz-table>
