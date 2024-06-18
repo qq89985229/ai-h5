@@ -1,10 +1,8 @@
-import {EventEmitter, Injectable, TemplateRef, Type} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {NzModalRef, NzModalService, OnClickCallback} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzImageService} from "ng-zorro-antd/image";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {Observable, of} from "rxjs";
-import {ModalButtonOptions} from "ng-zorro-antd/modal/modal-types";
 
 @Injectable({
   providedIn: 'root'
